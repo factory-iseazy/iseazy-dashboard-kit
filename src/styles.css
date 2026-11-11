@@ -1,0 +1,104 @@
+/* Estilos del dashboard-kit. La app los importa DESPUÉS de `@import "tailwindcss";`:
+     @import "tailwindcss";
+     @import "@iseazy/dashboard-kit/styles.css";
+   Tokens isEazy: §2.2 (claro) y §2.8 (oscuro) del design system, con los nombres que usan los
+   componentes del kit. Modo oscuro = clase `dark` en <html> (ThemeModeProvider). */
+
+/* Que Tailwind encuentre las clases usadas por el kit, viva donde viva el paquete. */
+@source ".";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --brand: #eb1c79;
+  --brand-dark: #bc1661;
+  --brand-soft: #fdecf4;
+  --purple: #3b189b;
+  --purple-mid: #89239b;
+  --info: #03a0f4;
+  --success: #73c13c;
+  --destructive: #dc3545;
+  --warning: #c99a0f; /* oro oscurecido de §13.3 (el #DCB01B de §2.2 no pasa la validación) */
+
+  --ink: #333333;
+  --ink-deep: #212529;
+  --subtle: #525252;
+  --soft: #83919b;
+  --line: #ebebeb;
+  --line-strong: #d1d1d1;
+  --surface: #fcfcfc;
+  --card: #ffffff;
+  --muted: #f4f4f4;
+  --muted-2: #f8f8f8;
+}
+
+/* §2.8 Modo oscuro (valores del design system, sin tokens inventados). Donde §2.8 da el hex
+   exacto en comentario se usa el hex: su HSL es una aproximación (329 84% 51% compila a #EB1986,
+   no al magenta de marca #EB1C79). Donde solo da HSL, se usa el HSL. */
+.dark {
+  --brand: #eb1c79;
+  --brand-dark: hsl(333 79% 60%);
+  --brand-soft: hsl(330 30% 15%);
+  --purple: #b47ae5;
+  --purple-mid: hsl(292 64% 60%);
+  --info: hsl(196 96% 60%);
+  --success: hsl(93 53% 60%);
+  --destructive: hsl(354 70% 60%);
+  --warning: hsl(45 86% 60%);
+
+  --ink: #f4f4f4;
+  --ink-deep: hsl(0 0% 98%);
+  --subtle: hsl(0 0% 75%);
+  --soft: #999999;
+  --line: #383838;
+  --line-strong: hsl(0 0% 32%);
+  --surface: #14161a;
+  --card: #1c1f24;
+  --muted: #24272e;
+  --muted-2: hsl(0 0% 15%);
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
+  --color-purple: var(--purple);
+  --color-purple-mid: var(--purple-mid);
+  --color-info: var(--info);
+  --color-success: var(--success);
+  --color-destructive: var(--destructive);
+  --color-warning: var(--warning);
+
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-subtle: var(--subtle);
+  --color-soft: var(--soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+}
+
+@theme {
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Numerales tabulares SOLO en columnas comparables (tablas, ejes): los valores grandes sueltos
+   usan cifras proporcionales. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--brand-soft);
+}
