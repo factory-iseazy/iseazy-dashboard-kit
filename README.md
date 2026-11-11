@@ -24,15 +24,20 @@ Es la capa de **código** de un sistema de tres capas:
 
 ## Instalar
 
-En el `package.json` de la app, fijando siempre un **tag**:
+En el `package.json` de la app, con el **tarball del tag** (fija la versión exacta):
 
 ```json
 "dependencies": {
-  "@iseazy/dashboard-kit": "github:factory-iseazy/iseazy-dashboard-kit#v0.1.0"
+  "@iseazy/dashboard-kit": "https://github.com/factory-iseazy/iseazy-dashboard-kit/archive/refs/tags/v0.1.0.tar.gz"
 }
 ```
 
-Y después `npm install`. Para subir de versión se cambia el tag y se vuelve a instalar.
+Y después `npm install`, y se sube el `package-lock.json`. Para subir de versión se cambia el tag de
+la URL y se vuelve a instalar.
+
+**No uses la forma `github:factory-iseazy/iseazy-dashboard-kit#v0.1.0`**: npm la descarga con git, y
+las imágenes `node:*-slim` y `node:*-alpine` que usan los Dockerfile de las tools no lo traen, así
+que el build de despliegue falla. El tarball se descarga por HTTPS y no necesita git (D-005).
 
 ## Usar
 

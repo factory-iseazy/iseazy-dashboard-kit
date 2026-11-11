@@ -47,3 +47,22 @@ Vite + TypeScript + Tailwind v4, se reabre.
 
 **Por qué:** las apps ya importan de `@iseazy/dashboard-kit`; cambiarlo obligaría a tocar todos sus
 imports.
+
+## D-005 · 2026-11-11 · Las apps instalan el tarball del tag, no la forma `github:`
+
+**Decisión:** la dependencia se declara con la URL
+`https://github.com/factory-iseazy/iseazy-dashboard-kit/archive/refs/tags/vX.Y.Z.tar.gz`.
+
+**Por qué:** comprobado en un contenedor `node:20-slim` (la imagen del build web de las tools):
+- `npm install "github:factory-iseazy/iseazy-dashboard-kit#main"` falla con `enoent ... git`: npm
+  necesita git y la imagen no lo trae.
+- Con el tarball, `npm install` y `npm ci` (con el lockfile generado) funcionan sin git, y la app de
+  origen compila dentro del contenedor con el mismo CSS que en local.
+
+**Contras asumidos:** no admite rangos de versión (se cambia la URL para subir) y npm instala el repo
+entero, porque `files` no se aplica a un tarball remoto (inofensivo). El lockfile guarda el checksum
+del tarball que genera GitHub: si alguna vez cambiara, `npm ci` fallaría por integridad y bastaría con
+regenerar el lockfile con `npm install`.
+
+**Descartado:** `github:` + instalar git en el Dockerfile de cada tool (un paso más en cada imagen);
+publicar en GitHub Packages (token en cada build, aunque el paquete sea público).

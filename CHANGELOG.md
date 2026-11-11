@@ -11,7 +11,9 @@ repo donde maduró; no cambia ninguna pieza ni ninguna prop.
 - `package.json` propio con `react`, `react-dom` y `tailwindcss` v4 como dependencias de la app
   (peer) y `npm run typecheck` independiente.
 - Comprobado que una app que lo instala desde este repo compila (typecheck incluido) y genera
-  exactamente las mismas clases CSS que con el kit dentro del propio repo.
+  exactamente las mismas clases CSS que con el kit dentro del propio repo, también dentro de un
+  contenedor `node:20-slim` como el del despliegue.
+- Se instala con el tarball del tag, no con `github:` (D-005).
 
 ### Lo que traía de su etapa anterior (resumen)
 
